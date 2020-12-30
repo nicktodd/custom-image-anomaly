@@ -31,4 +31,5 @@ ENV PATH="/opt/program:${PATH}"
 # Set up the program in the image
 COPY anomaly_model /opt/program
 WORKDIR /opt/program
+RUN chmod u+x serve train predictor.py GESD.py
 
