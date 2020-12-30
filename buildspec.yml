@@ -1,0 +1,25 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 963778699255.dkr.ecr.eu-west-1.amazonaws.com 
+      #- aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 520713654638.dkr.ecr.eu-west-1.amazonaws.com
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...    
+      - account=$(aws sts get-caller-identity --query Account --output text)      
+      - cd docker
+      - docker build -t anomalyimage:latest .
+      - docker tag anomalyimage:latest ${account}.dkr.ecr.eu-west-1.amazonaws.com/anomalyimage:latest
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push ${account}.dkr.ecr.eu-west-1.amazonaws.com/anomalyimage:latest
+artifacts:
+  name: ${account}.dkr.ecr.eu-west-1.amazonaws.com/anomalyimage:latest
+
+  
