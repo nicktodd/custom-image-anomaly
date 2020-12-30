@@ -18,7 +18,7 @@ print(bucket)
 docker_image_name = account + ".dkr.ecr.eu-west-1.amazonaws.com/anomalyimage:latest"
 
 sess = sagemaker.session.Session()
-anomaly_detection = sagemaker.estimator.Estimator(image_name=docker_image_name,
+anomaly_detection = sagemaker.estimator.Estimator(image_uri=docker_image_name,
                                     role=role,
                                     train_instance_count=1, 
                                     train_instance_type='ml.m4.xlarge',
