@@ -9,11 +9,12 @@ RUN apt-get -y update && apt-get install -y --no-install-recommends \
 	 libevent-dev \
 	 python-all-dev \
 	 python3-dev \
-    && rm -rf /var/lib/apt/lists/*
-
+    && rm -rf /var/lib/apt/lists 
 RUN wget https://bootstrap.pypa.io/3.3/get-pip.py && python3.5 get-pip.py
+# gevent requires pip 18 or above https://www.gevent.org/development/installing_from_source.html
+RUN pip install --upgrade pip
 RUN pip3 install numpy==1.16.2 scipy==1.2.1 scikit-learn==0.20.2 pandas flask statsmodels
-RUN easy_install gevent
+RUN pip3 install gevent==1.5.0
 RUN pip3 install gunicorn && \
         (cd /usr/local/lib/python3.5/dist-packages/scipy/.libs; rm *; ln ../../numpy/.libs/* .) && \
         rm -rf /root/.cache
