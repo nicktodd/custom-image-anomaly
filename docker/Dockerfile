@@ -1,4 +1,6 @@
-FROM ubuntu:16.04
+#FROM ubuntu:16.04
+# Dockerhub have now begun throttling requests for images so the ubuntu image needs to have been copied into your local ECR registry
+FROM 827978678406.dkr.ecr.eu-west-1.amazonaws.com/ubuntu:16.04
 
 RUN apt-get -y update && apt-get install -y --no-install-recommends \
          wget \
@@ -10,7 +12,7 @@ RUN apt-get -y update && apt-get install -y --no-install-recommends \
 	 python-all-dev \
 	 python3-dev \
     && rm -rf /var/lib/apt/lists 
-RUN wget https://bootstrap.pypa.io/3.3/get-pip.py && python3.5 get-pip.py
+RUN wget https://bootstrap.pypa.io/pip/3.3/get-pip.py && python3.5 get-pip.py
 # gevent requires pip 18 or above https://www.gevent.org/development/installing_from_source.html
 RUN pip install --upgrade pip
 RUN pip3 install numpy==1.16.2 scipy==1.2.1 scikit-learn==0.20.2 pandas flask statsmodels
