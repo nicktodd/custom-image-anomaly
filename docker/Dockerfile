@@ -1,6 +1,9 @@
-FROM ubuntu:16.04
+#ROM ubuntu:16.04
 # Dockerhub have now begun throttling requests for images so the ubuntu image needs to have been copied into your local ECR registry
 #FROM 827978678406.dkr.ecr.eu-west-1.amazonaws.com/ubuntu:16.04
+
+# This is in a public repo in the training account
+FROM public.ecr.aws/n7c5o9i0/ubuntu:16.04
 
 RUN apt-get -y update && apt-get install -y --no-install-recommends \
          wget \
