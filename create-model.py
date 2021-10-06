@@ -21,7 +21,7 @@ print(region)
 print(role)
 print(bucket)
 
-docker_image_name = account + ".dkr.ecr.eu-west-1.amazonaws.com/anomalyimage:latest"
+docker_image_name = account + ".dkr.ecr.us-east-1.amazonaws.com/anomalyimage:latest"
 
 
 
